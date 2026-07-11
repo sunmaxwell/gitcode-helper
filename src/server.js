@@ -23,6 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const PORT = process.env.PORT || 3000;
+// 监听地址:0.0.0.0 = 绑定所有网卡,允许外部 IP 访问;127.0.0.1 = 仅本机。
+// 注意:本服务无鉴权,开放外部访问时务必配置 ALLOWED_SUBMITTERS 白名单。
+const HOST = process.env.HOST || '0.0.0.0';
 const ALLOWED_LABELS = new Set(['/approve', '/lgtm']);
 const ALLOWED_SUBMITTERS = (process.env.ALLOWED_SUBMITTERS || '')
   .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
@@ -134,8 +137,8 @@ async function initServer() {
 if (require.main === module) {
   (async () => {
     await db.initDb();
-    app.listen(PORT, () => {
-      console.log(`gitcode-helper 已启动: http://localhost:${PORT}`);
+    app.listen(PORT, HOST, () => {
+      console.log(`gitcode-helper 已启动: http://${HOST}:${PORT} (绑定 ${HOST},外部可访问)`);
       queue.start();
     });
   })();
