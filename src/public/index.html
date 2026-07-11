@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitCode PR 标签提交</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="card">
+    <h1>GitCode PR 标签提交</h1>
+    <p class="sub">填写 PR 链接,选择要添加的标签,后台自动在对应 PR 发表评论。</p>
+    <p class="sub" style="margin-bottom:20px;"><a href="history.html" style="color:#3370ff;text-decoration:none;">查看提交历史 →</a></p>
+
+    <form id="form" novalidate>
+      <label class="field">
+        <span>PR 链接 <em>*</em></span>
+        <input type="url" name="pr_url" id="pr_url"
+               placeholder="https://gitcode.com/{owner}/{repo}/pulls/{编号}" required>
+      </label>
+
+      <fieldset class="field">
+        <legend>标签 <em>*</em>(至少选 1 个)</legend>
+        <label class="check"><input type="checkbox" name="labels" value="/approve"> <code>/approve</code></label>
+        <label class="check"><input type="checkbox" name="labels" value="/lgtm"> <code>/lgtm</code></label>
+      </fieldset>
+
+      <label class="field">
+        <span>提交人 <em>*</em></span>
+        <input type="text" name="submitter" id="submitter" placeholder="你的名字" required>
+      </label>
+
+      <button type="submit" id="submitBtn">提交</button>
+      <p id="err" class="err" hidden></p>
+    </form>
+
+    <section id="result" hidden>
+      <h2>提交结果</h2>
+      <p>提交编号:<b id="rid"></b></p>
+      <p>状态:<b id="rstatus"></b></p>
+      <div id="rdetail"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

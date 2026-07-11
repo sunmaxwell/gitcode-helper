@@ -1,0 +1,17 @@
+{
+  "name": "gitcode-helper",
+  "version": "1.0.0",
+  "description": "收集 GitCode PR 链接与 /approve、/lgtm 标签,后台调 GitCode API 自动发评论",
+  "type": "commonjs",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "sql.js": "^1.11.0"
+  }
+}

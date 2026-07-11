@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>提交历史 · GitCode Helper</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
+  .toolbar .nav { font-size: 14px; }
+  .toolbar .nav a { color: #3370ff; text-decoration: none; }
+  .filter { display: flex; gap: 6px; align-items: center; font-size: 13px; }
+  .filter select { padding: 6px 8px; border: 1px solid #dee0e3; border-radius: 6px; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid #f0f1f2; vertical-align: top; }
+  th { color: #646a73; font-weight: 600; font-size: 12px; }
+  td.url { word-break: break-all; max-width: 280px; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; }
+  .pill.done { color: #00b42a; background: #e8ffea; }
+  .pill.failed { color: #f54a45; background: #ffece8; }
+  .pill.pending, .pill.running { color: #ff7d00; background: #fff3e0; }
+  .lbl { display: inline-block; margin-right: 4px; background: #f5f6f7; padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+  #more { margin-top: 16px; width: 100%; }
+  .empty { text-align: center; color: #8f959e; padding: 32px 0; }
+  .meta { color: #8f959e; font-size: 12px; }
+  .detail { color: #646a73; font-size: 12px; margin-top: 2px; }
+</style>
+</head>
+<body>
+  <main class="card" style="max-width: 880px;">
+    <div class="toolbar">
+      <div>
+        <h1 style="margin-bottom:0;">提交历史</h1>
+        <p class="sub">所有 PR 标签提交记录与执行结果</p>
+      </div>
+      <div class="filter">
+        <span>状态</span>
+        <select id="statusFilter">
+          <option value="">全部</option>
+          <option value="pending">待处理</option>
+          <option value="running">处理中</option>
+          <option value="done">已完成</option>
+          <option value="failed">失败</option>
+        </select>
+        <span class="nav"><a href="index.html">← 去提交</a></span>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:46px;">#</th>
+          <th>PR 链接</th>
+          <th>标签</th>
+          <th>提交人</th>
+          <th>状态</th>
+          <th>时间</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div id="empty" class="empty" hidden>暂无记录</div>
+    <button id="more" type="button" hidden>加载更多</button>
+    <p id="count" class="meta"></p>
+  </main>
+  <script src="history.js"></script>
+</body>
+</html>
